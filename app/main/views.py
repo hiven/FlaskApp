@@ -1,4 +1,4 @@
-from flask import current_app, render_template
+from flask import current_app, render_template, request, redirect, flash
 from app import db
 from . import main_blueprint
 from .models import Items
@@ -28,7 +28,7 @@ def add_item():
     return render_template('main/add.html', form=form)
     
 
-@main_blueprint.route('/test')
+@main_blueprint.route('/test2')
 def index():
     return render_template('main/index.html')
 
