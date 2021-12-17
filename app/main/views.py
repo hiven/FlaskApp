@@ -28,9 +28,10 @@ def add_item():
     return render_template('main/add.html', form=form)
     
 
-@main_blueprint.route('/test2')
-def index():
-    return render_template('main/index.html')
-
-
-
+@main_blueprint.route('/delete_item/<items_id>')
+def delete_item(items_id):
+    item = Items.query.filter_by(id=items_id).first_or_404()
+    db.session.delete(item)
+    db.session.commit()
+    flash('{} was deleted.'.format(item.name), 'success')
+    return redirect(url_for('all_items'))
