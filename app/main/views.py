@@ -21,7 +21,7 @@ def add_item():
                 db.session.add(new_item)
                 db.session.commit()
                 flash('Item added', 'success')
-                return redirect(url_for('all_items'))
+                return redirect(url_for('main.all_items'))
             except:
                 db.session.rollback()
                 flash('Something went wrong', 'danger')
@@ -34,4 +34,4 @@ def delete_item(items_id):
     db.session.delete(item)
     db.session.commit()
     flash('{} was deleted.'.format(item.name), 'success')
-    return redirect(url_for('all_items'))
+    return redirect(url_for('main.all_items'))
