@@ -30,23 +30,25 @@ def add_item():
 @items_blueprint.route('/edit_item/<items_id>', methods=['GET', 'POST'])
 def edit_item(items_id):
     form = EditItemsForm(request.form)
-    item_with_user = db.session.query(Items).filter(Items.id == items_id).first()
-            if request.method == 'POST':
-                if form.validate_on_submit():
-                    try:
-                        item = Items.query.get(items_id)
-                        item.name = form.name.data
-                        item.notes = form.notes.data
-                        db.session.commit()
-                        message = Markup("Item edited successfully!")
-                        flash(message, 'success')
-                        return redirect(url_for('main.all_items'))
-                    except:
-                        db.session.rollback()
-                        flash('Something went wrong', 'danger')
-            return render_template('edit_item.html', item=item_with_user, form=form)
+    item_with_user = db.session.query(Items).filter(Items.id
+            == items_id).first()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            try:
+                item = Items.query.get(items_id)
+                item.name = form.name.data
+                item.notes = form.notes.data
+                db.session.commit()
+                message = Markup('Item edited successfully!')
+                flash(message, 'success')
+                return redirect(url_for('main.all_items'))
+            except:
+                db.session.rollback()
+                flash('Something went wrong', 'danger')
+                return render_template('edit_item.html',
+                        item=item_with_user, form=form)
             else:
-                 flash('Something went wrong', 'danger')
+                flash('Something went wrong', 'danger')
     return redirect(url_for('main.all_items'))
 
 @main_blueprint.route('/delete_item/<items_id>')
