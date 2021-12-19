@@ -30,7 +30,6 @@ def add_item():
 @main_blueprint.route("/edit_item/<items_id>", methods=["GET", "POST"])
 def edit_item(items_id):
     form = EditItemsForm(request.form)
-    item_with_user = db.session.query(Items).filter(Items.id == items_id).first()
     if request.method == "POST":
         if form.validate_on_submit():
             try:
@@ -38,13 +37,12 @@ def edit_item(items_id):
                 item.name = form.name.data
                 item.notes = form.notes.data
                 db.session.commit()
-                message = Markup("Item edited successfully!")
-                flash(message, "success")
+                flash("Item edited successfully!", "success")
                 return redirect(url_for("main.all_items"))
             except:
                 db.session.rollback()
                 flash("Unable to edit item", "danger")
-        return render_template("edit_item.html", item=item_with_user, form=form)
+        return render_template("edit_item.html", item=item, form=form)
     else:
         flash('Something went wrong', 'danger')
     return redirect(url_for("main.all_items"))
