@@ -43,13 +43,11 @@ def edit_item(items_id):
                         return redirect(url_for('main.all_items'))
                     except:
                         db.session.rollback()
-                        flash('Unable to edit item', 'danger')
+                        flash('Something went wrong', 'danger')
             return render_template('edit_item.html', item=item_with_user, form=form)
-    else:
-        message = Markup("<strong>Error!</strong> Item does not exist.")
-        flash(message, 'danger')
+            else:
+                 flash('Something went wrong', 'danger')
     return redirect(url_for('main.all_items'))
-    
 
 @main_blueprint.route('/delete_item/<items_id>')
 def delete_item(items_id):
