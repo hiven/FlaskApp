@@ -9,7 +9,7 @@ def create_app(config_class=Config):
 
     app = Flask(__name__)
     app.config.from_object(config_class)
-    
+#not sure if i mucked this up
     db.init_app(app)
 
     from app.main import main_blueprint
