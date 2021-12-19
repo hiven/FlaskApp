@@ -2,7 +2,7 @@ from flask import current_app, render_template, request, redirect, flash, url_fo
 from app import db
 from . import main_blueprint
 from .models import Items
-from .forms import ItemsForm
+from .forms import ItemsForm, EditItemsForm
 
    
 @main_blueprint.route('/', methods=['GET', 'POST'])
