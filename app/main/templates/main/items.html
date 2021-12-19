@@ -24,7 +24,7 @@
         {{ item.notes }}
       </td>
       <td>
-        <a href="#">Edit</a>
+        <a href="{{ url_for('main.edit_item', items_id=item.id) }}">Edit</a>
         <a href="{{ url_for('main.delete_item', items_id=item.id) }}">Delete</a>
       </td>
     </tr>
