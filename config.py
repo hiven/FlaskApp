@@ -7,7 +7,7 @@ load_dotenv()
 
 
 class Config(object):
-    DEBUG = False
+    DEBUG = True
     TESTING = False
     CSRF_ENABLED = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
