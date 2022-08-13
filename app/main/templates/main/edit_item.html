@@ -1,9 +1,10 @@
-{% extends "_base.html" %}
+{% extends "main_base.html" %}
 {% block title %}Edit Item{% endblock %}
-{% from "_formshelper.html" import render_field %}
+{% from "main/_formshelper.html" import render_field %}
+
 {% block content %}
 
-<form action="{{ url_for('items.edit_item', items_id=item.Items.id) }}" method="post" name="edititemsform">
+<form action="{{ url_for('main.edit_item', items_id=item.Items.id) }}" method="post" name="edititemsform">
     {{ form.csrf_token }}
     <div class="form-group">
       {{ form.name.label }}
