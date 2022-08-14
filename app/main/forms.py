@@ -6,6 +6,6 @@ class ItemsForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(min=1, max=254)])
     notes = StringField('Notes')
     
-class EditItemsForm(FlaskForm):
+class ItemsForm(EditItemsForm):
     name = StringField('Name', validators=[DataRequired(), Length(min=1, max=254)])
     notes = StringField('Notes')
