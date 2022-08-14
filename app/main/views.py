@@ -29,8 +29,8 @@ def add_item():
 
 @main_blueprint.route('/view_item/<items_id>', methods=['GET', 'POST'])
 def view_item(items_id):
-     specific_item = Items.query.filter_by(items_id)
-    return render_template('main/items.html', items=specific_item)   
+    single_item = Items.query.filter_by(items_id)
+    return render_template('main/items.html', items=single_item)   
 
     
 @main_blueprint.route('/edit_item/<items_id>', methods=['GET', 'POST'])
