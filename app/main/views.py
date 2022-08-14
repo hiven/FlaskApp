@@ -26,6 +26,12 @@ def add_item():
                 db.session.rollback()
                 flash('Something went wrong', 'danger')
     return render_template('main/add.html', form=form)
+
+@main_blueprint.route('/view_item/<items_id>', methods=['GET', 'POST'])
+def view_item(items_id):
+     specific_item = Items.query.filter_by(items_id)
+    return render_template('main/items.html', items=specific_item)   
+
     
 @main_blueprint.route('/edit_item/<items_id>', methods=['GET', 'POST'])
 def edit_item(items_id):
