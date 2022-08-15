@@ -30,7 +30,7 @@ def add_item():
 @main_blueprint.route('/view/<items_id>', methods=['GET', 'POST'])
 def view_items():
     view_user_items = Items.query.filter_by()
-    return render_template('main/item.html', items=view_user_items) 
+    return render_template('main/items.html', items=view_user_items)
     
    
 @main_blueprint.route('/edit_item/<items_id>', methods=['GET', 'POST'])
