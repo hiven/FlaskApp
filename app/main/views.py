@@ -12,7 +12,7 @@ def all_items():
 
 @main_blueprint.route('/view/<items_id>', methods=['GET', 'POST'])
 def view_items():
-    view_user_items = Items.query.filter_by()
+    view_user_items = Items.query.filter_by(id=items_id)
     return render_template('main/items.html', items=view_user_items)
 
 @main_blueprint.route('/add', methods=['GET', 'POST'])
