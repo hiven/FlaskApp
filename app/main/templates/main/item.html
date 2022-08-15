@@ -1,6 +1,6 @@
 {% extends "main/_base.html" %}
 
-{% block title %}All Items{% endblock %}
+{% block title %} {{ item.name }} {% endblock %}
 {% block content %}
 
 {% if items[0] == NULL %}
