@@ -9,7 +9,11 @@ from .forms import ItemsForm, EditItemsForm
 def all_items():
     all_user_items = Items.query.filter_by()
     return render_template('main/items.html', items=all_user_items)
-    
+
+@main_blueprint.route('/view/<items_id>', methods=['GET', 'POST'])
+def view_items():
+    view_user_items = Items.query.filter_by()
+    return render_template('main/items.html', items=view_user_items)
 
 @main_blueprint.route('/add', methods=['GET', 'POST'])
 def add_item():
@@ -27,12 +31,7 @@ def add_item():
                 flash('Something went wrong', 'danger')
     return render_template('main/add.html', form=form)
 
-@main_blueprint.route('/view/<items_id>', methods=['GET', 'POST'])
-def view_items():
-    view_user_items = Items.query.filter_by()
-    return render_template('main/items.html', items=view_user_items)
-    
-   
+
 @main_blueprint.route('/edit_item/<items_id>', methods=['GET', 'POST'])
 def edit_item(items_id):
     form = EditItemsForm(request.form)
