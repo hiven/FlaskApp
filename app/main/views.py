@@ -15,6 +15,11 @@ def view_items(items_id):
     view_user_items = Items.query.filter_by(id=items_id)
     return render_template('main/items.html', items=view_user_items)
 
+@main_blueprint.route('/view/', methods=['GET', 'POST'])
+def view_items():
+    view_user_items = Items.query.filter_by()
+    return render_template('main/items.html', items=view_user_items)
+
 @main_blueprint.route('/add', methods=['GET', 'POST'])
 def add_item():
     form = ItemsForm(request.form)
