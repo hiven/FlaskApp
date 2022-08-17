@@ -1,19 +1,26 @@
-from flask import current_app, render_template, request, redirect, flash, url_for
+from flask import current_app, flash, render_template, request, redirect, url_for
 from app import db
 from . import main_blueprint
 from .models import Items
 from .forms import ItemsForm, EditItemsForm
 
-   
+
 @main_blueprint.route('/', methods=['GET', 'POST'])
 def all_items():
-    all_user_items = Items.query.filter_by()
-    return render_template('main/items.html', items=all_user_items)
+    items = Items.query.filter_by()
+    return render_template('main/items.html', items=items)
+
 
 @main_blueprint.route('/view/<items_id>', methods=['GET', 'POST'])
 def view_items(items_id):
-    view_user_items = Items.query.filter_by(id=items_id)
-    return render_template('main/items.html', items=view_user_items)
+    item = Items.query.filter_by(id=items_id).first()
+    if item:
+        flash('Item List Ok')
+        return render_template('main/item.html', item=item)
+    else:
+        flash('Something went wrong')
+        return redirect(url_for('main.all_items'))
+
 
 @main_blueprint.route('/add', methods=['GET', 'POST'])
 def add_item():
@@ -29,10 +36,10 @@ def add_item():
             except:
                 db.session.rollback()
                 flash('Something went wrong', 'danger')
-    return render_template('main/add.html', form=form)
+    return render_template('main/add.html',)
 
 
-@main_blueprint.route('/edit_item/<items_id>', methods=['GET', 'POST'])
+@main_blueprint.route('/edit/<items_id>', methods=['GET', 'POST'])
 def edit_item(items_id):
     form = EditItemsForm(request.form)
     if request.method == 'POST':
@@ -49,11 +56,11 @@ def edit_item(items_id):
                 flash('Unable to edit item', 'danger')
         return render_template('edit_item.html', item=item, form=form)
     else:
-        flash('Something went wrong', 'danger')
+        flash('Something went wrong')
     return redirect(url_for('main.all_items'))
 
 
-@main_blueprint.route('/delete_item/<items_id>')
+@main_blueprint.route('/delete/<items_id>')
 def delete_item(items_id):
     item = Items.query.filter_by(id=items_id).first_or_404()
     db.session.delete(item)
