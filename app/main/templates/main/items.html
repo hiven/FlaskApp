@@ -3,6 +3,18 @@
 {% block title %}All Items{% endblock %}
 {% block content %}
 
+<div class="row">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class=flashes>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+</div>
+
 {% if items[0] == NULL %}
 <div class="panel-body">
   <p>No items are added yet, <a href="{{ url_for('main.add_item') }}">add a new item</a>.</p>

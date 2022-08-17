@@ -1,35 +1,16 @@
 {% extends "main/_base.html" %}
 
-{% block title %}All Items{% endblock %}
+{% block title %}Item{% endblock %}
 {% block content %}
 
-{% if items[0] == NULL %}
+{% if item[0] == NULL %}
 <div class="panel-body">
   <p>No items are added yet, <a href="{{ url_for('main.add_item') }}">add a new item</a>.</p>
 </div>
+<p>{{ item.name }}</p>
 {% else %}
-<table class="table table-stripe">
-  <thead>
-    <tr>
-      <th class="border-top-0">Name</th>
-      <th class="border-top-0">Notes</th>
-      <th class="border-top-0"></th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for item in items %}
-    <tr>
-      <td><a href="{{ url_for('main.view_items', items_id=item.id) }}">{{ item.name }}</a></td>
-      <td>
-        {{ item.notes }}
-      </td>
-      <td>
-        <a href="{{ url_for('main.edit_item', items_id=item.id) }}">Edit</a>
-        <a href="{{ url_for('main.delete_item', items_id=item.id) }}">Delete</a>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<p>{{ item.name }}</p>
+
+
 {% endif %}
 {% endblock %}
