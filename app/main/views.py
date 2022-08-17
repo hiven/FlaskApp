@@ -36,7 +36,7 @@ def add_item():
             except:
                 db.session.rollback()
                 flash('Something went wrong', 'danger')
-    return render_template('main/add.html',)
+    return render_template('main/add.html', form=form)
 
 
 @main_blueprint.route('/edit/<items_id>', methods=['GET', 'POST'])
